@@ -171,8 +171,8 @@ Si pour les `reword` de **`G`**, **`I`** et **`K`** on saisit:
 
 on obtient alors:
 ```
-             G---H---I---J---K---L---M (orphan commits, will by gc'ed)
-           /
+            G---H---I---J---K---L---M (orphan commits, will by gc'ed)
+          /
           | X---Y---Z (feat/my-nice-feature)
           |/
   A---B---C (master)---D---E---F (origin/master)

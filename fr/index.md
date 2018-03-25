@@ -2,7 +2,7 @@
 
 ## Petit retour rapide sur `git pull` en mode `--merge` (comportement par défaut)
 
-Prennons une divergeance d'historique (ex: travail de deux personnes concurrentes sur une même branche).
+Prenons une divergence d'historique (ex: travail de deux personnes concurrentes sur une même branche).
 
 ```
             G---H (master)
@@ -28,7 +28,7 @@ si l'on effectue un merge (via `git merge origin/master` ou `git pull [origin ma
 ```
 
 **Avantages:**
-- permet de bien visualiser la parralélisation des développement et donc de bien identifier les risques de conflits d'intégration (incompatibilité entre deux features).
+- permet de bien visualiser la parallélisation des développement et donc de bien identifier les risques de conflits d'intégration (incompatibilité entre deux features).
 - simplicité du workflow: on n'utilise que 3 commandes : `commit`, `pull`, `push`.
 - permet de faciliter l'éviction d'un feature problématique pour la production d'une démo ou d'une build de production si tous les commits liés à cette feature sont bien isolés dans une branche dédiée avant d'être mergée.
 
@@ -40,7 +40,7 @@ si l'on effectue un merge (via `git merge origin/master` ou `git pull [origin ma
 
 ## vers un workflow typé `merge` plus poussé
 
-Petit détail génant dans l'historique final précédent, notre commit **`I`** est nommé par défaut **merged origin/master into master** ce qui faisait sens dans la structure d'arborescence d'historique d'avant push, mais beaucoup moins après. Cette incongruité de nommage de commit peut facilement être résolu en ne travaillant jamais en local sur la branche d'intégration mais sur une branche de feature (ex: **`feat/my-nice-feature`**).
+Petit détail gênant dans l'historique final précédent, notre commit **`I`** est nommé par défaut **merged origin/master into master** ce qui faisait sens dans la structure d'arborescence d'historique d'avant push, mais beaucoup moins après. Cette incongruité de nommage de commit peut facilement être résolu en ne travaillant jamais en local sur la branche d'intégration mais sur une branche de feature (ex: **`feat/my-nice-feature`**).
 
 On obtiendrait alors avant le pull:
 ```
@@ -63,7 +63,7 @@ puis si nos tests sont réussi on pourra reverser la branche de feature dans la 
   A---B---C---D---E---F---J (origin/master)
 ```
 
-Si notre historique a été complexifié avec un commit *inutile* de plus, on obtient un historique avec une sémentique plus claire puisque l'on aura nos commits **`I`** et **`J`** respectivement nommés:
+Si notre historique a été complexifié avec un commit *inutile* de plus, on obtient un historique avec une sémantique plus claire puisque l'on aura nos commits **`I`** et **`J`** respectivement nommés:
 **`I`**: *merged origin/master into feat/my-nice-feature* on comprend bien qu'il s'agit d'une resynchronisation d'une branche de feature avec l'état de l'intégration.
 
 **`J`**: *merged feat/my-nice-feature into master* on comprend bien qu'une feature vient d'être ajoutée à l'intégration.
@@ -72,11 +72,11 @@ Ce type de workflow merge se prête, lorsque le versement d'une feature à l'int
 - l'audit de code par le responsable qualité du code en prévalidation de la pull-request (la validation pouvant être automatique et sans relecture pour les équipiers de confiance ayant fait leurs preuves mais approfondie pour les nouveaux équipier ayant plus de chance de causer des problèmes).
 - la qualification de la feature sur sa propre branche par le Product Owner qui choisira alors d'accepter ou non la pull-request.
 
-**Ce type de workflow permet de mieux protéger la branche d'intégration pour utilisation dans le cadre de production de build de démos ou d'exploitation (seules les features sléectionnées pour la build étant versées dans sa branche, on évitera que du code appartenant à une feature rejetée ou en cours ne risque de causer des perturbations).**
+**Ce type de workflow permet de mieux protéger la branche d'intégration pour utilisation dans le cadre de production de build de démos ou d'exploitation (seules les features sélectionnées pour la build étant versées dans sa branche, on évitera que du code appartenant à une feature rejetée ou en cours ne risque de causer des perturbations).**
 
 ## `git pull --rebase`
 
-On reprend notre divergeance précédente
+On reprend notre divergence précédente
 ```
             G---H (feat/my-nice-feature)
            /
@@ -102,7 +102,7 @@ git cherry-pick H
 
 On obtient alors une branche `feat/my-nice-feature` qui est un `fast-forward` de la branche d'intégration.
 
-En cas de conflits lors d'un `git pull --merge`, ceux-ci sont résolu interractivement de la même manière que lors d'un merge, sauf qu'au lieu de stocker le patch de résolution des conflits dans le commit de merge ce qui a tendance à rendre obscure le résultat d'un `git blame`, les conflits sont résolus au niveau de chaque cherry-pick.
+En cas de conflits lors d'un `git pull --merge`, ceux-ci sont résolu interactivement de la même manière que lors d'un merge, sauf qu'au lieu de stocker le patch de résolution des conflits dans le commit de merge ce qui a tendance à rendre obscure le résultat d'un `git blame`, les conflits sont résolus au niveau de chaque cherry-pick.
 
 On pourra conserver la facilité d'éviction de feature d'un worflow pur merge en forçant la création d'un commit de merge (`git merge --no-ff`) lors du reversement de la branche de feature dans celle d'intégration.
 
@@ -156,13 +156,13 @@ reword K    tests IHM
 fixup M    //fix erreurs test automatiques
 ```
 
-On nottera que l'ordre a été changé: le commit **`L`** n'étant que la correction d'une erreur effectuée dans le commit **`L`**, on a remonté le premier jusqte après le dernier pour les regrouper.
+On notera que l'ordre a été changé: le commit **`L`** n'étant que la correction d'une erreur effectuée dans le commit **`L`**, on a remonté le premier juste après le dernier pour les regrouper.
 Lors de la fermeture de l'éditeur, git va revenir à l'état C, puis suivre la séquence demandée selon le verbe au début de chaque ligne:
 - `pick`: le commit est cherry-pické.
 - `reword`: comme `pick` mais git demande de saisir un nouveau message de commit.
-- `edit`: comme `pick` sauf que le rebase est mis en pause après ce cherry-pick et la main vous est rendue permettant d'effectuer des actions après ce commit (par exemple ammender le commit ou créer un nouveau commit entre celui-ci et le prochain.
+- `edit`: comme `pick` sauf que le rebase est mis en pause après ce cherry-pick et la main vous est rendue permettant d'effectuer des actions après ce commit (par exemple amender le commit ou créer un nouveau commit entre celui-ci et le prochain.
 - `fixup`: le commit est est fusionné avec le précédant en conservant le message du précédent
-- `squash`: le commit est fusionné avec le précédent en ajoutant aglomérant les deux messages.
+- `squash`: le commit est fusionné avec le précédent en ajoutant agglomérant les deux messages.
 
 Si pour les `reword` de **`G`**, **`I`** et **`K`** on saisit:
 - **`G`**: \[US-XXX\] Fichiers de configuration de la feature X

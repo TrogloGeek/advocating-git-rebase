@@ -156,7 +156,7 @@ reword K    tests IHM
 fixup M    //fix erreurs test automatiques
 ```
 
-On notera que l'ordre a été changé: le commit **`L`** n'étant que la correction d'une erreur effectuée dans le commit **`L`**, on a remonté le premier juste après le dernier pour les regrouper.
+On notera que l'ordre a été changé: le commit **`L`** n'étant que la correction d'une erreur effectuée dans le commit **`J`**, on a remonté le premier juste après le dernier pour les regrouper.
 Lors de la fermeture de l'éditeur, git va revenir à l'état C, puis suivre la séquence demandée selon le verbe au début de chaque ligne:
 - `pick`: le commit est cherry-pické.
 - `reword`: comme `pick` mais git demande de saisir un nouveau message de commit.

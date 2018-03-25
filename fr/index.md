@@ -64,9 +64,8 @@ puis si nos tests sont réussi on pourra reverser la branche de feature dans la 
 ```
 
 Si notre historique a été complexifié avec un commit *inutile* de plus, on obtient un historique avec une sémantique plus claire puisque l'on aura nos commits **`I`** et **`J`** respectivement nommés:
-**`I`**: *merged origin/master into feat/my-nice-feature* on comprend bien qu'il s'agit d'une resynchronisation d'une branche de feature avec l'état de l'intégration.
-
-**`J`**: *merged feat/my-nice-feature into master* on comprend bien qu'une feature vient d'être ajoutée à l'intégration.
+- **`I`**: *merged origin/master into feat/my-nice-feature* on comprend bien qu'il s'agit d'une resynchronisation d'une branche de feature avec l'état de l'intégration.
+- **`J`**: *merged feat/my-nice-feature into master* on comprend bien qu'une feature vient d'être ajoutée à l'intégration.
 
 Ce type de workflow merge se prête, lorsque le versement d'une feature à l'intégration est effectuée au moyen d'un pull-request à:
 - l'audit de code par le responsable qualité du code en prévalidation de la pull-request (la validation pouvant être automatique et sans relecture pour les équipiers de confiance ayant fait leurs preuves mais approfondie pour les nouveaux équipier ayant plus de chance de causer des problèmes).
